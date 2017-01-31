@@ -1,0 +1,22 @@
+To run the serial code
+ 
+g++ pagerank.cpp tableSerial.cpp
+
+time ./a.out -p tests.txt
+
+To run the parallel code
+
+g++ -fopenmp pagerank.cpp tableParallel.cpp
+
+time ./a.out -p tests.txt
+
+To test the readFile
+
+g++ readFile.c
+
+./a.out <fileName>
+
+Additional Notes:
+
+The input graph file names should be added to the tests.txt.
+The number of threads in the parallel code is set to 8.
