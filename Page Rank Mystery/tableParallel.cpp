@@ -176,6 +176,7 @@ size_t Table::insert_mapping(const string &key) {
 
     return index;
 }
+//modified read file
 string read_file_modified(const string &fileName)
 {
     ifstream ifs(fileName.c_str(), ios::in | ios::binary | ios::ate);
@@ -188,6 +189,7 @@ string read_file_modified(const string &fileName)
 
     return string(&bytes[0], fileSize);
 }
+//original read file
 int Table::read_file(const string &filename) 
 {
 
@@ -209,6 +211,7 @@ int Table::read_file(const string &filename)
     size_t delim_len = delim.length();
     size_t linenum = 0;
     string line; // current line
+    //calling new file read function
     stringstream entire_file(read_file_modified(filename));
     while (getline(entire_file,line,'\n')) {
         string from, to; // from and to fields
@@ -370,6 +373,12 @@ void Table::pagerank() {
             double h = 0.0;
             for (vector<size_t>::iterator ci = rows[i].begin(); ci != rows[i].end(); ci++) {
                 /* The current element of the H vector */
+
+                /*
+                OPTIMISATION ATTEMPT
+                pre compute this value into a vector
+                not much gain in performance due to sparse matrix
+                */
                 double h_v = (num_outgoing[*ci])
                     ? 1.0 / num_outgoing[*ci]
                     : 0.0;
